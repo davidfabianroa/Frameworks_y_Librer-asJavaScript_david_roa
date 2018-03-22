@@ -153,6 +153,38 @@ function horizontal_borrar(pos, fila_mod) {
 		fila_mod[pos[i]].addClass('delete');
 	}
 }
+function mostrar_error(error) {console.log(error);
+}
+
+function desaparecer_caramelos() {
+	return new Promise(function (rslv, reject) {
+		if ($('img.delete').remove()) {
+			rslv(true);
+		} else {
+			reject('imposible borrar..');
+		}
+	})
+}
+
+//terminar el juego
+function finalizar() {
+	$('div.panel-tablero, div.time').effect('fold');
+	$('h1.main-titulo').addClass('title-over')
+		.text('Gracias por jugar!');
+	$('div.score, div.moves, div.panel-score').width('100%');
+	
+}
+
+// inicia el juego
+function iniciar() {parpadear('h1.main-titulo');
+	$('.btn-reinicio').click(function () {if ($(this).text() === 'Reiniciar') {location.reload(true);}
+		caramelos_de_pantalla();$(this).text('Reiniciar');$('#timer').startTimer({onComplete: finalizar	})});
+}
+
+
+$(function() {iniciar();});
+
+
 
 
 
